@@ -49,3 +49,4 @@ EDA
     - julius.ai - very useful it also have workflow (template)
     - use this for EDA
 
+    

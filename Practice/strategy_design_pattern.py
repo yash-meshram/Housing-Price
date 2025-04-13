@@ -26,7 +26,7 @@ class PayPalPayment(PaymentMethod):
 
 # step 3: defining the context
 class ShoppingCart:
-    def __init__(self, payment_method: PaymentMethod):
+    def __init__(self, payment_method: PaymentMethod):          #This is a constructor method with parameter payment_method
         self.payment_method = payment_method
 
     def checkout(self, amount):
