@@ -42,6 +42,8 @@ class Person:
 if __name__ == "__main__":
     c1 = Calculator(10)
     c2 = Calculator(20)
+    c3 = Calculator.add_numbers(1, 2, 3, 4, 5)
+    print(c3)
 
     c1.description()
     print(Calculator.add_numbers(1, 2, 3))
