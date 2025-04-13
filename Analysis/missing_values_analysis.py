@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 class MissingValuesAnalysisTemplate(ABC):
@@ -27,14 +28,15 @@ class SimpleMissingValuesAnalysis(MissingValuesAnalysisTemplate):
     def visualize_missing_values(self, df: pd.DataFrame):
         missing_values = df.isnull().sum()  # .sort_values(ascending=False)
         # missing_values = missing_values[missing_values > 0]
-        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), sharex=True, gridspec_kw={"hspace": 0.02})
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), sharex = True, gridspec_kw={"hspace": 0.02})
 
         print("\nVisualizing missing values:")
         sns.barplot(x=missing_values.index, y=missing_values.values, ax=ax1)
-        # plt.xticks(rotation=90)
         ax1.bar_label(ax1.containers[0], rotation=90, padding=3)
 
         sns.heatmap(df.isnull(), cbar=False, cmap="viridis", ax=ax2)
+        ax2.set_xticks(np.arange(len(df.columns)) + 0.5)
+        ax2.set_xticklabels(df.columns, rotation=90, ha='center')
         plt.show()
 
 
