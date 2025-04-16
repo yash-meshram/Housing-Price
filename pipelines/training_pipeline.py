@@ -1,8 +1,10 @@
 from steps.data_ingesttion_step import data_ingestion_step
 from steps.handling_missing_values_step import handling_missing_values
 from steps.feature_engineering_step import feature_engineering
+from steps.outlier_detection_step import outlier_detection
+from steps.data_splitter_step import data_splitter_step
 
-from zenml import Model, pipeline, step
+from zenml import Model, pipeline
 
 @pipeline(
     model = Model(
@@ -27,4 +29,10 @@ def ml_pipeline():
         features = ["Gr Liv Area", "SalePrice"]
     )
     
-    return df_transform
+    # Outlier detection and handling the outliers
+    outliers, df_cleaned = outlier_detection(df_transform)
+    
+    # Data splitting step
+    X_train, X_test, y_train, y_test = data_splitter_step(df_cleaned, target_column = "SalePrice")
+    
+    return X_train, X_test, y_train, y_test
